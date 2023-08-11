@@ -16,7 +16,26 @@ const Card = (article) => {
   //     <span>By { authorName }</span>
   //   </div>
   // </div>
-  //
+  const holder = document.createElement('div');
+  const headline = document.createElement('div');
+  const author = document.createElement('div');
+  const imgContainer = document.createElement('div');
+  const authorPhoto = document.createElement('img');
+  const authorName = document.createElement('span');
+
+  holder.className = 'card';
+  headline.className = 'headline';
+  headline.textContent = article.headline;
+  author.className = 'author';
+  imgContainer.className = 'img-container';
+  authorPhoto.setAttribute('src', article.authorPhoto);
+  authorName.textContent = 'By ' + article.authorName;
+
+  holder.append(headline, author);
+  author.append(imgContainer, authorName);
+  imgContainer.append(authorPhoto);
+
+  return holder;
 }
 
 const cardAppender = (selector) => {
