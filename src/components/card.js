@@ -37,7 +37,7 @@ const Card = (article) => {
   author.append(imgContainer, authorName);
   imgContainer.append(authorPhoto);
   holder.addEventListener('click', event => {
-    console.log(event.target.headline);
+    console.log(headline.textContent);
   });
 
   return holder;
@@ -51,11 +51,25 @@ const cardAppender = (selector) => {
   // However, the articles do not come organized in a single, neat array. Inspect the response closely!
   // Create a card from each and every article object in the response, using the Card component.
   // Append each card to the element in the DOM that matches the selector passed to the function.
+  console.log(selector);
   axios.get(`http://localhost:5001/api/articles`)
     .then(response => {
-      console.log(response); //response.data.articles
-      console.log(Array.from(response.data.articles));
-      // document.querySelector(selector).append(Card(response.data.articles[0][0])) //document.querySelector(selector).append(Tabs(response.data.topics));
+      console.log(response.data.articles);
+      response.data.articles.bootstrap.forEach(article => {
+        document.querySelector(selector).append(Card(article))
+      });
+      response.data.articles.javascript.forEach(article => {
+        document.querySelector(selector).append(Card(article))
+      });
+      response.data.articles.jquery.forEach(article => {
+        document.querySelector(selector).append(Card(article))
+      });
+      response.data.articles.node.forEach(article => {
+        document.querySelector(selector).append(Card(article))
+      });
+      response.data.articles.technology.forEach(article => {
+        document.querySelector(selector).append(Card(article))
+      });
     })
     .catch(error => console.log(error));
 }
